@@ -1,9 +1,10 @@
 #!/bin/bash
 
+# 16 threads and germany as default
 # Defaults
 NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/srv/nominatim/data"}
 NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="data"}
-NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/asia/maldives-latest.osm.pbf"}
+NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/europe/germany-latest.osm.pbf"}
 
 
 # Retrieve the PBF file
@@ -19,7 +20,7 @@ sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='nomin
 sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='www-data'" | grep -q 1 || sudo -u postgres createuser -SDR www-data
 sudo -u postgres psql postgres -c "DROP DATABASE IF EXISTS nominatim"
 useradd -m -p password1234 nominatim
-sudo -u nominatim /srv/nominatim/build/utils/setup.php --osm-file $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf --all --threads 2
+sudo -u nominatim /srv/nominatim/build/utils/setup.php --osm-file $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf --all --threads 16
 
 
 # Tail Apache logs
