@@ -1,7 +1,7 @@
 FROM ubuntu:xenial as builder
 
 ENV NOMINATIM_VERSION 3.4.0
-
+# hg24112019 EXPOSE 8181
 # Let the container know that there is no TTY
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -96,4 +96,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 5432
-EXPOSE 8080
+EXPOSE 8181
