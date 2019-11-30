@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+    nominatim8181:
+        ports:
+            - '8181:8181'
+        environment:
+            - 'NOMINATIM_PBF_URL=http://download.geofabrik.de/europe/germany-latest.osm.pbf'
+        container_name: nominatim8181
+        image: harryhahn/nominatim8181:latest
+        
